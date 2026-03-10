@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  rdp-server:
+    build: .
+    container_name: railway-rdp
+    restart: always
+    ports:
+      - "3389:3389"   # RDP
+      - "8080:8080"   # noVNC
+      - "5901:5901"   # VNC
+      - "4000:4000"   # NoMachine
+      - "8000:8000"   # File server
+      - "80:80"       # HTTP
+      - "443:443"     # HTTPS
+    environment:
+      - PASSWORD=Antyrx@123
+      - RESOLUTION=1920x1080
+    volumes:
+      - rdp-data:/root
+      - rdp-config:/etc
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+        reservations:
+          memory: 4G
+
+volumes:
+  rdp-data:
+  rdp-config:
