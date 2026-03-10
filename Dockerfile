@@ -1,4 +1,4 @@
-# Dockerfile - FIXED VERSION
+# Dockerfile - FIXED SYNTAX
 FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -8,7 +8,7 @@ ENV RESOLUTION=1920x1080
 
 RUN apt-get update && apt-get upgrade -y
 
-# Install essential packages - NGINX BHI ADD KARO!
+# Install essential packages - SAHI SYNTAX!
 RUN apt-get install -y \
     xfce4 \
     xfce4-goodies \
@@ -29,7 +29,7 @@ RUN apt-get install -y \
     xrdp \
     xorgxrdp \
     dbus-x11 \
-    nginx \              # ← YEH LINE ADD KARO!
+    nginx \
     && apt-get clean
 
 # Install Chrome Remote Desktop
@@ -38,7 +38,7 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
     && apt-get update \
     && apt-get install -y chrome-remote-desktop
 
-# Install NoMachine (URL fix karo - typo tha)
+# Install NoMachine
 RUN wget https://download.nomachine.com/download/8.10/Linux/nomachine_8.10.1_1_amd64.deb \
     && dpkg -i nomachine_8.10.1_1_amd64.deb || apt-get install -f -y \
     && rm nomachine_8.10.1_1_amd64.deb
@@ -51,7 +51,7 @@ RUN mkdir -p /root/.vnc \
 # Copy configuration files
 COPY start.sh /start.sh
 COPY setup.py /setup.py
-COPY nginx.conf /etc/nginx/nginx.conf          # ← NGINX CONFIG COPY
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Set permissions
